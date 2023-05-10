@@ -11,7 +11,16 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 
+import cors from 'cors'
+
+
 dotenv.config()
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
 
 connectDB()
 
@@ -22,6 +31,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.json())
+app.use(cors(corsOptions)); // Use this after the variable declaration
+
 
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
